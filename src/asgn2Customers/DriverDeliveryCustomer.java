@@ -28,7 +28,15 @@ public class DriverDeliveryCustomer extends Customer {
 	 * 
 	 */
 	public DriverDeliveryCustomer(String name, String mobileNumber, int locationX, int locationY) throws CustomerException {
-		// TO DO
+		super(name, mobileNumber, locationX, locationY, "DNC");
+//		this.name = name;
+//		this.mobileNumber = mobileNumber;
+//		this.locationX = locationX;
+//		this.locationY = locationY;
+		
+		if(name.length() > 20 || name.contentEquals(" ") || mobileNumber.length() > 10 || mobileNumber.startsWith("0") || locationX == 0.0 || locationY == 0.0){
+			throw new CustomerException();
+		}
 	}
 	
 	/**
@@ -38,6 +46,14 @@ public class DriverDeliveryCustomer extends Customer {
 	 * @return The distance between the restaurant and the customer in Manhattan distance.
 	 */
 	@Override
-	public double getDeliveryDistance() {	}
+	public double getDeliveryDistance() {
+		int storeLocationX = 0;
+		int storeLocationY = 0;
+		int locationX = getLocationX();
+		int locationY = getLocationY();
+		
+		double distance = Math.abs(storeLocationX - locationX) + Math.abs(storeLocationY - locationY);
+		return distance;
+	}
 
 }

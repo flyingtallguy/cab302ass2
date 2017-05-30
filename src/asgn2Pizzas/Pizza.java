@@ -1,6 +1,9 @@
 package asgn2Pizzas;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+
+import asgn2Exceptions.PizzaException;
 
 
 /**
@@ -14,6 +17,17 @@ import java.time.LocalTime;
  */
 public abstract class Pizza  {
 	
+	private int quantity;
+	
+	private LocalTime orderTime;
+	private LocalTime deliveryTime;
+	private String type;
+	private double price;
+	private double cost;
+	private double totalPrice = 0;
+	private double totalCost = 0;
+	private double orderProfit = 0;
+
 	/**
 	 *  This class represents a pizza produced at the Pizza Palace restaurant.  A detailed description of the class's fields
 	 *  and parameters is provided in the Assignment Specification, in particular in Section 5.1. 
@@ -32,8 +46,24 @@ public abstract class Pizza  {
 	 * 
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
-		// TO DO	
+		// TO DO
+		this.quantity = quantity;
+		this.orderTime = orderTime;
+		this.deliveryTime = deliveryTime;
+		this.type = type;
+		this.price = price;
+		
+		if(quantity <= 0){
+			throw new PizzaException();
+		}
+		else if(quantity > 10){
+			throw new PizzaException();
+		}
+		else if(type != "Margherita" || type != "Vegetarian" || type != "Meat Lovers"){
+			throw new PizzaException();
+		}
 	}
+
 
 	/**
 	 * Calculates how much a pizza would cost to make calculated from its toppings.
@@ -43,14 +73,26 @@ public abstract class Pizza  {
 	 */
 	public final void calculateCostPerPizza(){
 		// TO DO
+		if(type.equals("Margherita")){
+			this.cost = PizzaTopping.CHEESE.getCost() + PizzaTopping.TOMATO.getCost();
+		}
+		else if(type.equals("Vegetarian")){
+			this.cost = PizzaTopping.TOMATO.getCost() + PizzaTopping.CHEESE.getCost() + PizzaTopping.EGGPLANT.getCost()
+			+ PizzaTopping.MUSHROOM.getCost() + PizzaTopping.CAPSICUM.getCost();
+		}
+		else if(type.equals("Meat Lovers")){
+			this.cost = PizzaTopping.TOMATO.getCost() + PizzaTopping.CHEESE.getCost() + PizzaTopping.BACON.getCost()
+			+ PizzaTopping.PEPPERONI.getCost() + PizzaTopping.SALAMI.getCost();
+		}
 	}
-	
+
 	/**
 	 * Returns the amount that an individual pizza costs to make.
 	 * @return The amount that an individual pizza costs to make.
 	 */
 	public final double getCostPerPizza(){
 		// TO DO
+		return cost;
 	}
 
 	/**
@@ -59,6 +101,7 @@ public abstract class Pizza  {
 	 */
 	public final double getPricePerPizza(){
 		// TO DO
+		return price;
 	}
 
 	/**
@@ -67,6 +110,8 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderCost(){
 		// TO DO
+		totalCost = cost * quantity;
+		return totalCost;
 	}
 	
 	/**
@@ -75,6 +120,8 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderPrice(){
 		// TO DO
+		totalPrice = price * quantity;
+		return totalPrice;
 	}
 	
 	
@@ -84,6 +131,8 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderProfit(){
 		// TO DO
+		orderProfit = totalPrice - totalCost;
+		return orderProfit;
 	}
 	
 
@@ -94,7 +143,20 @@ public abstract class Pizza  {
 	 */
 	public final boolean containsTopping(PizzaTopping topping){
 		// TO DO
-	}
+		if(type == "Margherita" && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO)){
+			return true;
+		}
+		else if(type == "Vegetarian" && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO
+				|| topping == PizzaTopping.EGGPLANT || topping == PizzaTopping.MUSHROOM || topping == PizzaTopping.CAPSICUM)){
+			return true;
+		}
+		if(type == "Meat Lovers" && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO
+				|| topping == PizzaTopping.BACON || topping == PizzaTopping.PEPPERONI || topping == PizzaTopping.SALAMI)){
+			return true;
+		} else {
+			return false;
+		}
+	}	
 	
 	/**
 	 * Returns the quantity of pizzas ordered. 
@@ -102,6 +164,7 @@ public abstract class Pizza  {
 	 */
 	public final int getQuantity(){
 		// TO DO
+		return quantity;
 	}
 
 	/**
@@ -111,6 +174,7 @@ public abstract class Pizza  {
 	 */
 	public final String getPizzaType(){
 		// TO DO
+		return type;
 	}
 
 

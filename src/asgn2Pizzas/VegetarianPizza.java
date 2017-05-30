@@ -33,6 +33,29 @@ public class VegetarianPizza extends Pizza {
 	 */
 	public VegetarianPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
+		super(quantity, orderTime, deliveryTime, "Vegetarian", 10);
+		int endOrderTime = 23;
+		int startOrderTime = 19;
+		int maxOrderTime = 1;
+		int maxPizza = 10;
+		int minPizza = 1;
+		
+		if(quantity > maxPizza){
+			throw new PizzaException();
+		}
+		else if (quantity < minPizza){
+			throw new PizzaException();
+		}
+		else if (orderTime.getHour() > endOrderTime){
+			throw new PizzaException();
+		}
+		else if(orderTime.getHour() < startOrderTime){
+			throw new PizzaException();
+		}
+		else if ((deliveryTime.getHour() - orderTime.getHour()) >= maxOrderTime){
+			throw new PizzaException();
+		}
+		
 	}
 
 }

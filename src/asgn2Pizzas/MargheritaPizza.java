@@ -16,6 +16,9 @@ import asgn2Exceptions.PizzaException;
  *
  */
 public class MargheritaPizza extends Pizza {
+	
+	String Type;
+	Double Price;
 
 	
 	/**
@@ -36,6 +39,29 @@ public class MargheritaPizza extends Pizza {
 	 */
 	public MargheritaPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
+		super(quantity, orderTime, deliveryTime, "Margherita", 8);
+		int endOrderTime = 23;
+		int startOrderTime = 19;
+		int maxOrderTime = 1;
+		int maxPizza = 10;
+		int minPizza = 1;
+		
+		if(quantity > maxPizza){
+			throw new PizzaException();
+		}
+		else if (quantity < minPizza){
+			throw new PizzaException();
+		}
+		else if (orderTime.getHour() > endOrderTime){
+			throw new PizzaException();
+		}
+		else if(orderTime.getHour() < startOrderTime){
+			throw new PizzaException();
+		}
+		else if ((deliveryTime.getHour() - orderTime.getHour()) >= maxOrderTime){
+			throw new PizzaException();
+		}
+		
 	}
 
 }
