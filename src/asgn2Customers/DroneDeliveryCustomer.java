@@ -38,7 +38,22 @@ public class DroneDeliveryCustomer extends Customer {
 //		this.locationX = locationX;
 //		this.locationY = locationY;
 		
-		if(name.length() > 20 || name.contentEquals(" ") || mobileNumber.length() > 10 || mobileNumber.startsWith("0") || locationX == 0.0 || locationY == 0.0){
+		if(name.length() > 20){
+			throw new CustomerException();
+		}
+		if(name.contentEquals(" ")){
+			throw new CustomerException();
+		}
+		if(mobileNumber.length() > 10){
+			throw new CustomerException();
+		}
+		if(mobileNumber.startsWith("0") == false){
+			throw new CustomerException();
+		}
+		if(locationX == 0.0){
+			throw new CustomerException();
+		}
+		if(locationY == 0.0){
 			throw new CustomerException();
 		}
 	}

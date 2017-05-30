@@ -89,14 +89,14 @@ public class LogHandler {
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException{
 		Customer Customer = null;
-   	    String[] Customers = line.split(COMMA);
+   	    String[] Customers = line.split(",");
    	    String type = Customers[4];
    	    String name = Customers[2];
    	    String mobileNumber = Customers[3];
    	    int locationX = Integer.parseInt(Customers[5]);
    	    int locationY = Integer.parseInt(Customers[6]);
 
-   	    Customer = CustomerFactory.getCustomer(type, name, mobileNumber, locationX, locationY);
+   	    Customer = CustomerFactory.getCustomer(Customers[4], name, mobileNumber, locationX, locationY);
 		return Customer;
 	}
 	

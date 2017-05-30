@@ -29,16 +29,13 @@ public class CustomerFactory {
 	 */
 	public static Customer getCustomer(String customerCode, String name, String mobileNumber, int locationX,  int locationY) throws CustomerException{
 		// TO DO
-		if(customerCode == null){
-			return null;
-		}
-		else if(customerCode == "PUC"){
+		if(customerCode.equals("PUC")){
 			return new PickUpCustomer(name, mobileNumber, locationX, locationY);
 		}
-		else if(customerCode == "DNC"){
+		else if(customerCode.equals("DVC")){
 			return new DroneDeliveryCustomer(name, mobileNumber, locationX, locationY);
 		}
-		else if(customerCode == "DVC"){
+		else if(customerCode.equals("DNC")){
 			return new DriverDeliveryCustomer(name, mobileNumber, locationX, locationY);
 		} else {
 			throw new CustomerException();
