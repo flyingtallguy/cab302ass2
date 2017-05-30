@@ -32,7 +32,7 @@ public class PickUpCustomer extends Customer {
 	 * 
 	 */
 	public PickUpCustomer(String name, String mobileNumber, int locationX,  int locationY) throws CustomerException {
-		super(name, mobileNumber, locationX, locationY, "PUC");
+		super(name, mobileNumber, locationX, locationY, "Pick Up");
 		
 		//this.name = name;
 		//this.mobileNumber = mobileNumber;

@@ -32,7 +32,7 @@ public class DroneDeliveryCustomer extends Customer {
 	 * 
 	 */
 	public DroneDeliveryCustomer(String name, String mobileNumber, int locationX, int locationY) throws CustomerException {
-		super(name, mobileNumber, locationX, locationY, "DNC");
+		super(name, mobileNumber, locationX, locationY, "Drone Delivery");
 //		this.name = name;
 //		this.mobileNumber = mobileNumber;
 //		this.locationX = locationX;

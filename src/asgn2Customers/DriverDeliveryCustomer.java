@@ -28,7 +28,7 @@ public class DriverDeliveryCustomer extends Customer {
 	 * 
 	 */
 	public DriverDeliveryCustomer(String name, String mobileNumber, int locationX, int locationY) throws CustomerException {
-		super(name, mobileNumber, locationX, locationY, "DNC");
+		super(name, mobileNumber, locationX, locationY, "Driver Delivery");
 //		this.name = name;
 //		this.mobileNumber = mobileNumber;
 //		this.locationX = locationX;
