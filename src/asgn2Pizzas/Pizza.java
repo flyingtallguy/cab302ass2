@@ -50,9 +50,18 @@ public abstract class Pizza  {
 		
 		int endOrderTime = 23;
 		int startOrderTime = 19;
-		int maxOrderTime = 1;
+		int maxOrderTime = 60;
 		int maxPizza = 10;
 		int minPizza = 1;
+		
+		int orderTimeHour = orderTime.getHour();
+		int orderTimeMinute = orderTime.getMinute();
+		int deliveryTimeHour = deliveryTime.getHour();
+		int deliveryTimeMinute = deliveryTime.getMinute();
+		
+		int timeOfOrder = (orderTimeHour * 60) + orderTimeMinute;
+		int timeOfDelivery = (deliveryTimeHour * 60) + deliveryTimeMinute;
+		
 		
 		this.quantity = quantity;
 		this.orderTime = orderTime;
@@ -72,12 +81,21 @@ public abstract class Pizza  {
 		else if(orderTime.getHour() < startOrderTime){
 			throw new PizzaException();
 		}
-		else if ((deliveryTime.getHour() - orderTime.getHour()) >= maxOrderTime){
+		else if ((timeOfDelivery - timeOfOrder) > 60){
 			throw new PizzaException();
 		}
 		else if(type.equals("Margherita") == false && type.equals("Vegetarian") == false && type.equals("Meat Lovers") == false){
 			throw new PizzaException();
 		}
+		// delivery time cut off is 23
+		// order time of 21:52 / 9:52
+		// delivery time of 22:07 / 10:07
+		// so the delivery took 15 minutes and is within the bounds
+		// so i need to throw exception if orderTime + the time of delivery > 1 hour
+		// timeOfORder = 21:52 = 21 * 60 + 52 = 1312
+		// timeOfDeilvery = 22:07 = 22 * 60 + 07 = 1327
+		// if timeOfDelivery - timeOfOrder > 60
+
 		
 	}
 
