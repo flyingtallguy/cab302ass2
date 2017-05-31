@@ -53,7 +53,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	//private JTable tblCustomer;
 	
 	private String filename;
-	private String FileNameExtensionFilter;
 	private String selectedFileName;
 	
 	private PizzaRestaurant restaurant;
@@ -207,6 +206,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         SwingUtilities.invokeLater(new PizzaGUI("BorderLayout"));
 	}
 	
+
 	
 	private void openFile() throws CustomerException, PizzaException, LogHandlerException {
 		final JFileChooser jfc = new JFileChooser();
