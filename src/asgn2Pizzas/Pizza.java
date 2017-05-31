@@ -47,21 +47,38 @@ public abstract class Pizza  {
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
 		// TO DO
+		
+		int endOrderTime = 23;
+		int startOrderTime = 19;
+		int maxOrderTime = 1;
+		int maxPizza = 10;
+		int minPizza = 1;
+		
 		this.quantity = quantity;
 		this.orderTime = orderTime;
 		this.deliveryTime = deliveryTime;
 		this.type = type;
 		this.price = price;
 		
-		if(quantity <= 0){
+		if(quantity > maxPizza){
 			throw new PizzaException();
 		}
-		else if(quantity > 10){
+		else if (quantity < minPizza){
 			throw new PizzaException();
 		}
-		else if(type != "Margherita" || type != "Vegetarian" || type != "Meat Lovers"){
+		else if (orderTime.getHour() > endOrderTime){
 			throw new PizzaException();
 		}
+		else if(orderTime.getHour() < startOrderTime){
+			throw new PizzaException();
+		}
+		else if ((deliveryTime.getHour() - orderTime.getHour()) >= maxOrderTime){
+			throw new PizzaException();
+		}
+		else if(type.equals("Margherita") == false && type.equals("Vegetarian") == false && type.equals("Meat Lovers") == false){
+			throw new PizzaException();
+		}
+		
 	}
 
 

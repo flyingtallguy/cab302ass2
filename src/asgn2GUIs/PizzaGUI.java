@@ -180,18 +180,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//fldPizza.setText(btn.getText().trim());
-			
-		      
+			//fldPizza.setText(btn.getText().trim());     
 		}
-//		else if (src==btnUnload) {
-//			JButton btn = ((JButton) src);
-//		      areDisplay.setText(btn.getText().trim());
-//		} else if (src==btnSwitch) {
-//			JOptionPane.showMessageDialog(this,"A Warning Message","Wiring Class: Warning",JOptionPane.WARNING_MESSAGE);
-//		} else if (src==btnFind) {
-//			JOptionPane.showMessageDialog(this,"An Error Message","Wiring Class: Error",JOptionPane.ERROR_MESSAGE);
-//		}
 	}
 	
 	@Override
