@@ -46,10 +46,7 @@ public class DriverDeliveryCustomer extends Customer {
 		if(mobileNumber.startsWith("0") == false){
 			throw new CustomerException();
 		}
-		if(locationX == 0.0){
-			throw new CustomerException();
-		}
-		if(locationY == 0.0){
+		if(locationX == 0.0 && locationY == 0.0){
 			throw new CustomerException();
 		}
 	}
