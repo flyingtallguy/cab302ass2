@@ -149,6 +149,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderCost(){
 		// TO DO
+		calculateCostPerPizza();
 		totalCost = cost * quantity;
 		return totalCost;
 	}

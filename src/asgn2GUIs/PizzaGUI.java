@@ -107,20 +107,20 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     
 
     //creating a customer table
-    pnlThree.setLayout(new BorderLayout());
+    pnlDisplay.setLayout(new BorderLayout());
     tblCustomers = new JTable(modelCustomer = new DefaultTableModel(new Object[]{"Name", "Mobile Number","Customer Type", "X Location", "Y Location", "Distance"}, 0));
 	jspCustomer = new JScrollPane(tblCustomers);
 	jspCustomer.setBounds(325, 66, 624, 192);
 	jspCustomer.setVisible(true);
-	pnlThree.add(jspCustomer);
+	pnlDisplay.add(jspCustomer);
 	
 	//creating the Order table
-	pnlDisplay.setLayout(new BorderLayout());
+	pnlThree.setLayout(new BorderLayout());
 	tblOrders = new JTable(modelOrders = new DefaultTableModel(new Object[]{"Pizza Type", " Quantity", "Order Price", "Order Cost", "Order Profit"}, 0));
     jspOrders = new JScrollPane(tblOrders);
     jspOrders.setBounds(325, 66, 624, 192);
     jspOrders.setVisible(true);
-	pnlDisplay.add(jspOrders);
+    pnlThree.add(jspOrders);
 	
 	//creating a Order and profits table
 	pnlFour.setLayout(new BorderLayout());
