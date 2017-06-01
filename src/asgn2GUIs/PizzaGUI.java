@@ -202,7 +202,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		      
 		//Consider the alternatives - not all active at once. 
 		if (src == btnLoadFile) {
-			JButton btn = ((JButton) src);
 			
 			try {
 				openFile();
@@ -221,7 +220,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		if (src == btnPizzaDisplay){
 			Pizza Pizza = null;
-			
+			btnPizzaDisplay.setEnabled(false);
 			
 			for(int i = 0; i < restaurant.getNumPizzaOrders(); i++){
 				try {
@@ -242,6 +241,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		if (src == btnCustomerDisplay){
 			Customer Customer = null;
+			btnCustomerDisplay.setEnabled(false);
 			
 			//System.out.println("Customer button pressed");
 			//modelCustomer.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
@@ -267,6 +267,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		}
 		
 		if (src == btnCalculate){
+			
 			restaurant.getTotalDeliveryDistance();
 			restaurant.getTotalProfit();
 		}
