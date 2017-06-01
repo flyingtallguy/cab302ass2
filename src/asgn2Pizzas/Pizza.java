@@ -51,6 +51,7 @@ public abstract class Pizza  {
 		int endOrderTime = 23;
 		int startOrderTime = 19;
 		int maxOrderTime = 60;
+		int minOrderTime = 10;
 		int maxPizza = 10;
 		int minPizza = 1;
 		
@@ -82,6 +83,9 @@ public abstract class Pizza  {
 			throw new PizzaException();
 		}
 		else if ((timeOfDelivery - timeOfOrder) > maxOrderTime){
+			throw new PizzaException();
+		}
+		else if((timeOfDelivery - timeOfOrder) < minOrderTime){
 			throw new PizzaException();
 		}
 		else if(type.equals("Margherita") == false && type.equals("Vegetarian") == false && type.equals("Meat Lovers") == false){

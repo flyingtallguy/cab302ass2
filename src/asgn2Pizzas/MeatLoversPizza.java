@@ -37,6 +37,7 @@ public class MeatLoversPizza extends Pizza {
 		int endOrderTime = 23;
 		int startOrderTime = 19;
 		int maxOrderTime = 60;
+		int minOrderTime = 10;
 		int maxPizza = 10;
 		int minPizza = 1;
 		
@@ -61,6 +62,9 @@ public class MeatLoversPizza extends Pizza {
 			throw new PizzaException();
 		}
 		else if ((timeOfDelivery - timeOfOrder) > maxOrderTime){
+			throw new PizzaException();
+		}
+		else if((timeOfDelivery - timeOfOrder) < minOrderTime){
 			throw new PizzaException();
 		}
 		
