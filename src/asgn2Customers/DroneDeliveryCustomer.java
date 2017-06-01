@@ -68,7 +68,7 @@ public class DroneDeliveryCustomer extends Customer {
 		int storeLocationX = 0;
 		int storeLocationY = 0;
 		
-		double euclidianDistance = Math.sqrt((Math.pow(LocationX, 2) - Math.pow(storeLocationX, 2)) - (Math.pow(LocationY, 2) - Math.pow(storeLocationY, 2)));
+		double euclidianDistance = Math.sqrt((Math.pow(LocationX, 2) - Math.pow(storeLocationX, 2)) + (Math.pow(LocationY, 2) - Math.pow(storeLocationY, 2)));
 		return euclidianDistance;
 	}
 	
