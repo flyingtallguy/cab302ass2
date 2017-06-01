@@ -24,7 +24,7 @@ public class PizzaRestaurant {
 
 	private ArrayList<Customer> customers;
 	private ArrayList<Pizza> pizzas;
-	final static String COMMA = ",";
+	//final static String COMMA = ",";
 
 	
 	/**
