@@ -71,7 +71,11 @@ public class PizzaRestaurant {
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		Customer Customer = customers.get(index);
-		return Customer;
+		if(index < customers.size()){
+			return Customer;
+		} else {
+			throw new CustomerException();
+		}
 	}
 	
 	/**
@@ -82,7 +86,11 @@ public class PizzaRestaurant {
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		Pizza Pizza = pizzas.get(index);
-		return Pizza;
+		if(index < pizzas.size()){
+			return Pizza;
+		} else {
+			throw new PizzaException();
+		}
 	}
 	
 	/**
