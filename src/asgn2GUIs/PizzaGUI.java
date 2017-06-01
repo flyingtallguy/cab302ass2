@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.text.DecimalFormat;
 
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultCaret;
 
 import asgn2Customers.Customer;
@@ -37,21 +38,35 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	public static final int WIDTH = 2000;
 	public static final int HEIGHT = 1000;
 
+	//creating pannels for data
 	private JPanel pnlDisplay;
 	private JPanel pnlTwo;
 	private JPanel pnlThree;
 	private JPanel pnlFour;
 	private JPanel pnlBtn;
 	
+	//creating buttons
 	private JButton btnLoadFile;
 	private JButton btnPizzaDisplay;
 	private JButton btnCustomerDisplay;
 	private JButton btnCalculate;
 	private JButton btnReset;
 	
-	private JTextField fldPizza;
-	//private JTable tblCustomer;
+	//setup for tables 
+	private DefaultTableModel modelCustomer;
+	private DefaultTableModel modelOrders;
+	private DefaultTableModel modelOrdersAndProfit;
+	private JScrollPane jspCustomer;
+	private JScrollPane jspOrders;
+	private JScrollPane jspOrdersAndProfit;
+	private JTable tblCustomers;
+	private JTable tblOrders;
+	private JTable tblOrdersAndProfit;
+	//private contentpane
 	
+
+	
+	//creating string variables for the log reader
 	private String filename;
 	private String selectedFileName;
 	
@@ -67,12 +82,12 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 	}
 	
-	private void createGUI() { 
+	private void createGUI() {
 	setSize(WIDTH, HEIGHT); 
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-	setLayout(new BorderLayout());
+	getContentPane().setLayout(new BorderLayout());
 	
-	pnlDisplay = createPanel(Color.WHITE);
+	pnlDisplay = createPanel(Color.LIGHT_GRAY);
 	pnlTwo = createPanel(Color.LIGHT_GRAY);
 	pnlThree = createPanel(Color.LIGHT_GRAY);
 	pnlFour = createPanel(Color.LIGHT_GRAY);
@@ -83,25 +98,53 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	btnPizzaDisplay.setEnabled(false);
 	btnCustomerDisplay = createButton("Customer Details");
 	btnCustomerDisplay.setEnabled(false);
-	btnCalculate = createButton("Calculate Profits");
+	btnCalculate = createButton("Calculate Profits and Distance");
 	btnCalculate.setEnabled(false);
 	btnReset = createButton("Reset");
 	btnReset.setEnabled(false);
 	
     layoutButtonPanel();
     
-    fldPizza = createTextField();
-    //tblCustomer = createTable();
+
+    //creating a customer table
+    pnlThree.setLayout(new BorderLayout());
+    tblCustomers = new JTable(modelCustomer = new DefaultTableModel(new Object[]{"Name", "Mobile Number", "X Location", "Y Location", "Distance"}, 0));
+	jspCustomer = new JScrollPane(tblCustomers);
+	jspCustomer.setBounds(325, 66, 624, 192);
+	jspCustomer.setVisible(true);
+	pnlThree.add(jspCustomer);
+	
+	//creating the Order table
+	pnlDisplay.setLayout(new BorderLayout());
+	tblOrders = new JTable(modelOrders = new DefaultTableModel(new Object[]{"Pizza Type", " Quantity", "Order Price", "Order Cost", "Order Profit"}, 0));
+    jspOrders = new JScrollPane(tblOrders);
+    jspOrders.setBounds(325, 66, 624, 192);
+    jspOrders.setVisible(true);
+	pnlDisplay.add(jspOrders);
+	
+	//creating a Order and profits table
+	pnlFour.setLayout(new BorderLayout());
+	tblOrdersAndProfit = new JTable(modelOrdersAndProfit = new DefaultTableModel(new Object[]{ "Total Distance", "Total Profit"}, 0));
+    jspOrdersAndProfit = new JScrollPane(tblOrdersAndProfit);
+    jspOrdersAndProfit.setBounds(325, 66, 624, 192);
+    jspOrdersAndProfit.setVisible(true);
+    pnlFour.add(jspOrdersAndProfit);
+	
+	
+	//creating the JTable for customers and orders
+//    modelCustomers = new DefaultTableModel(new Object[]{"Name", "Mobile", "Type", "X coords", "Y coords", "Distance"}, 0);
+//    tblCustomers = new JTable(modelCustomers);
     
-    pnlDisplay.setLayout(new BorderLayout());
-    pnlDisplay.add(fldPizza, BorderLayout.CENTER);
+//	modelCustomer = new DefaultTableModel(new Object[]{"Name", "Mobile", "Type", "X coords", "Y coords", "Distance"}, 0);
+//	tblCustomer = new JTable(modelCustomer);
     
 	
 	this.getContentPane().add(pnlDisplay,BorderLayout.CENTER);
 	this.getContentPane().add(pnlTwo,BorderLayout.SOUTH);
-	this.getContentPane().add(pnlBtn,BorderLayout.NORTH); 
-	this.getContentPane().add(pnlFour,BorderLayout.EAST); 
+	this.getContentPane().add(pnlBtn,BorderLayout.NORTH);
+	this.getContentPane().add(pnlFour,BorderLayout.EAST);
 	this.getContentPane().add(pnlThree,BorderLayout.WEST);
+	
 	
 	repaint();
 	this.setVisible(true);
@@ -121,13 +164,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		return jb; 
 	}
 	
-	private JTextField createTextField() {
-		JTextField jtf = new JTextField(); 
-		jtf.setEditable(false);
-		jtf.setFont(new Font("Arial",Font.BOLD,24));
-		jtf.setBorder(BorderFactory.createEtchedBorder());
-		return jtf;
-	}
 	
 	private void layoutButtonPanel() { 
 		GridBagLayout layout = new GridBagLayout();
@@ -165,7 +201,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		Object src=arg0.getSource(); 
 		      
 		//Consider the alternatives - not all active at once. 
-		if (src== btnLoadFile) {
+		if (src == btnLoadFile) {
 			JButton btn = ((JButton) src);
 			
 			try {
@@ -181,6 +217,76 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				e.printStackTrace();
 			}
 			//fldPizza.setText(btn.getText().trim());     
+		}
+		
+		if (src == btnPizzaDisplay){
+			JButton btn = ((JButton) src);
+			Pizza Pizza = null;
+			
+			
+			for(int i = 0; i > restaurant.getNumPizzaOrders(); i++){
+				try {
+					Pizza = restaurant.getPizzaByIndex(i);
+					Pizza.getPizzaType();
+					Pizza.getQuantity();
+					Pizza.getOrderPrice();
+					Pizza.getOrderCost();
+					Pizza.getOrderProfit();
+					
+					//fldPizza.setText(Pizza.getPizzaType()); // I DONT WORK
+
+				} catch (PizzaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		if (src == btnCustomerDisplay){
+			JButton btn = ((JButton) src);
+			Customer Customer = null;
+			
+
+			
+			for(int i = 0; i > restaurant.getNumCustomerOrders(); i++){
+				try {
+					modelCustomer.addRow(new Object[]{
+							restaurant.getCustomerByIndex(i).getName() , 
+							restaurant.getCustomerByIndex(i).getMobileNumber(),
+							restaurant.getCustomerByIndex(i).getCustomerType(), 
+							restaurant.getCustomerByIndex(i).getLocationX() , 
+							restaurant.getCustomerByIndex(i).getLocationY() , 
+							restaurant.getCustomerByIndex(i).getDeliveryDistance() });
+					
+//					restaurant.getCustomerByIndex(i);
+//					
+//					Customer.getName();
+//					Customer.getMobileNumber();
+//					Customer.getCustomerType();
+//					Customer.getLocationX();
+//					Customer.getLocationY();
+//					Customer.getDeliveryDistance();
+				} catch (CustomerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		}
+		
+		if (src == btnCalculate){
+			restaurant.getTotalDeliveryDistance();
+			restaurant.getTotalProfit();
+		}
+		
+		if (src == btnReset){
+			restaurant.resetDetails();
+			
+			btnLoadFile.setEnabled(true);
+			btnPizzaDisplay.setEnabled(false);
+			btnCustomerDisplay.setEnabled(false);
+			btnCalculate.setEnabled(false);
+			btnReset.setEnabled(false);
 		}
 	}
 	

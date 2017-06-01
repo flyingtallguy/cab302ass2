@@ -61,10 +61,10 @@ public class MeatLoversPizza extends Pizza {
 		else if(orderTime.getHour() < startOrderTime){
 			throw new PizzaException();
 		}
-		else if ((timeOfDelivery - timeOfOrder) > maxOrderTime){
+		else if ((timeOfDelivery - timeOfOrder) >= maxOrderTime){
 			throw new PizzaException();
 		}
-		else if((timeOfDelivery - timeOfOrder) < minOrderTime){
+		else if((timeOfDelivery - timeOfOrder) <= minOrderTime){
 			throw new PizzaException();
 		}
 		

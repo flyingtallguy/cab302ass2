@@ -82,10 +82,10 @@ public abstract class Pizza  {
 		else if(orderTime.getHour() < startOrderTime){
 			throw new PizzaException();
 		}
-		else if ((timeOfDelivery - timeOfOrder) > maxOrderTime){
+		else if ((timeOfDelivery - timeOfOrder) >= maxOrderTime){
 			throw new PizzaException();
 		}
-		else if((timeOfDelivery - timeOfOrder) < minOrderTime){
+		else if((timeOfDelivery - timeOfOrder) <= minOrderTime){
 			throw new PizzaException();
 		}
 		else if(type.equals("Margherita") == false && type.equals("Vegetarian") == false && type.equals("Meat Lovers") == false){
