@@ -71,7 +71,7 @@ public class MargheritaPizza extends Pizza {
 		else if ((timeOfDelivery - timeOfOrder) >= maxOrderTime){
 			throw new PizzaException();
 		}
-		else if((timeOfDelivery - timeOfOrder) <= minOrderTime){
+		else if((timeOfDelivery - timeOfOrder) < minOrderTime){
 			throw new PizzaException();
 		}
 		

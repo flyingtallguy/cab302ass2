@@ -108,7 +108,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
     //creating a customer table
     pnlThree.setLayout(new BorderLayout());
-    tblCustomers = new JTable(modelCustomer = new DefaultTableModel(new Object[]{"Name", "Mobile Number", "X Location", "Y Location", "Distance"}, 0));
+    tblCustomers = new JTable(modelCustomer = new DefaultTableModel(new Object[]{"Name", "Mobile Number","Customer Type", "X Location", "Y Location", "Distance"}, 0));
 	jspCustomer = new JScrollPane(tblCustomers);
 	jspCustomer.setBounds(325, 66, 624, 192);
 	jspCustomer.setVisible(true);
@@ -220,20 +220,18 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		}
 		
 		if (src == btnPizzaDisplay){
-			JButton btn = ((JButton) src);
 			Pizza Pizza = null;
 			
 			
-			for(int i = 0; i > restaurant.getNumPizzaOrders(); i++){
+			for(int i = 0; i < restaurant.getNumPizzaOrders(); i++){
 				try {
 					Pizza = restaurant.getPizzaByIndex(i);
-					Pizza.getPizzaType();
-					Pizza.getQuantity();
-					Pizza.getOrderPrice();
-					Pizza.getOrderCost();
-					Pizza.getOrderProfit();
-					
-					//fldPizza.setText(Pizza.getPizzaType()); // I DONT WORK
+					modelOrders.addRow(new Object[]{
+					Pizza.getPizzaType(),
+					Pizza.getQuantity(),
+					Pizza.getOrderPrice(),
+					Pizza.getOrderCost(),
+					Pizza.getOrderProfit()});
 
 				} catch (PizzaException e) {
 					// TODO Auto-generated catch block
@@ -243,31 +241,25 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		}
 		
 		if (src == btnCustomerDisplay){
-			JButton btn = ((JButton) src);
 			Customer Customer = null;
 			
-
+			//System.out.println("Customer button pressed");
+			//modelCustomer.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
 			
-			for(int i = 0; i > restaurant.getNumCustomerOrders(); i++){
+			for(int i = 0; i < restaurant.getNumCustomerOrders(); i++){
 				try {
+					Customer = restaurant.getCustomerByIndex(i);
 					modelCustomer.addRow(new Object[]{
-							restaurant.getCustomerByIndex(i).getName() , 
-							restaurant.getCustomerByIndex(i).getMobileNumber(),
-							restaurant.getCustomerByIndex(i).getCustomerType(), 
-							restaurant.getCustomerByIndex(i).getLocationX() , 
-							restaurant.getCustomerByIndex(i).getLocationY() , 
-							restaurant.getCustomerByIndex(i).getDeliveryDistance() });
-					
-//					restaurant.getCustomerByIndex(i);
-//					
-//					Customer.getName();
-//					Customer.getMobileNumber();
-//					Customer.getCustomerType();
-//					Customer.getLocationX();
-//					Customer.getLocationY();
-//					Customer.getDeliveryDistance();
+							Customer.getName(),
+							Customer.getMobileNumber(),
+							Customer.getCustomerType(),
+							Customer.getLocationX(),
+							Customer.getLocationY(),
+							Customer.getDeliveryDistance()});
+
 				} catch (CustomerException e) {
 					// TODO Auto-generated catch block
+					System.out.println("caught the customer block and didn't do anything");
 					e.printStackTrace();
 				}
 
@@ -281,6 +273,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		if (src == btnReset){
 			restaurant.resetDetails();
+			
+			modelCustomer.getDataVector().removeAllElements();
+			modelCustomer.fireTableDataChanged();
+			
+			
+			modelOrders.getDataVector().removeAllElements();
+			modelOrders.fireTableDataChanged();
 			
 			btnLoadFile.setEnabled(true);
 			btnPizzaDisplay.setEnabled(false);
