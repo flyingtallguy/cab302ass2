@@ -40,17 +40,17 @@ public class LogHandler {
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		ArrayList<Customer> Customers = new ArrayList<Customer>();
-
+		String line;
         try {
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
-			String line;
+			
 		    while ((line = reader.readLine()) != null) {
 		    	Customers.add(createCustomer(line));
 		    }
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new LogHandlerException();
 		}
+
         return Customers;
 	}		
 

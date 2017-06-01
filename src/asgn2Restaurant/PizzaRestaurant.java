@@ -151,8 +151,8 @@ public class PizzaRestaurant {
 	 * <P> POST:  The pizzas and customers fields are set to their initial empty states
 	 */
 	public void resetDetails(){
-		customers = new ArrayList<Customer>();
-		pizzas = new ArrayList<Pizza>();
+		customers.clear();;
+		pizzas.clear();;
 		
 	}
 
