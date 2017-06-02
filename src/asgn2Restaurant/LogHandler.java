@@ -48,7 +48,7 @@ public class LogHandler {
 		    	Customers.add(createCustomer(line));
 		    }
 		} catch (IOException e) {
-			throw new LogHandlerException();
+			throw new LogHandlerException("Log handler exception initiated");
 		}
 
         return Customers;
@@ -72,8 +72,7 @@ public class LogHandler {
 		    	Pizzas.add(createPizza(line));
 		    }
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new LogHandlerException("Log handler exception initiated");
 		}
         return Pizzas;
 	}		

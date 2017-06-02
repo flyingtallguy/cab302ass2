@@ -50,22 +50,22 @@ public class VegetarianPizza extends Pizza {
 		int timeOfDelivery = (deliveryTimeHour * 60) + deliveryTimeMinute;
 		
 		if(quantity > maxPizza){
-			throw new PizzaException();
+			throw new PizzaException("No Pizzas were ordered");
 		}
 		else if (quantity < minPizza){
-			throw new PizzaException();
+			throw new PizzaException("Maximum 10 pizzas");
 		}
 		else if (orderTime.getHour() > endOrderTime){
-			throw new PizzaException();
+			throw new PizzaException("No orders past 11pm, Restaurant Closed");
 		}
 		else if(orderTime.getHour() < startOrderTime){
-			throw new PizzaException();
+			throw new PizzaException("No orders before 7pm, Restaurant Closed");
 		}
 		else if ((timeOfDelivery - timeOfOrder) >= maxOrderTime){
-			throw new PizzaException();
+			throw new PizzaException("Delivery time over 1 hour, no longer edible");
 		}
 		else if((timeOfDelivery - timeOfOrder) < minOrderTime){
-			throw new PizzaException();
+			throw new PizzaException("Delivery time under 10 minutes, pizza is raw");
 		}
 		
 	}

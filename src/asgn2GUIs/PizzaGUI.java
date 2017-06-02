@@ -200,16 +200,12 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				openFile();
 				JOptionPane.showMessageDialog(this,"File Successfully Loaded","Success!",JOptionPane.INFORMATION_MESSAGE);
 			} catch (CustomerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Customer Exception", JOptionPane.ERROR_MESSAGE);
 			} catch (PizzaException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Pizza Exception", JOptionPane.ERROR_MESSAGE);
 			} catch (LogHandlerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, e.getMessage(), "LogHandler Exception", JOptionPane.ERROR_MESSAGE);
 			}
-			//fldPizza.setText(btn.getText().trim());     
 		}
 		
 		if (src == btnPizzaDisplay){
@@ -229,8 +225,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					Pizza.getOrderProfit()});
 
 				} catch (PizzaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(this, e.getMessage(), "Pizza Exception!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
@@ -252,9 +247,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 							Customer.getDeliveryDistance()});
 
 				} catch (CustomerException e) {
-					// TODO Auto-generated catch block
-					System.out.println("caught the customer block and didn't do anything");
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(this, e.getMessage(), "Customer Exception!", JOptionPane.ERROR_MESSAGE);
 				}
 
 			}
