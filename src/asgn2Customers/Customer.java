@@ -18,6 +18,7 @@ public abstract class Customer {
 	private int locationX;
 	private int locationY;
 	private String type;
+	//test
 
 
 
