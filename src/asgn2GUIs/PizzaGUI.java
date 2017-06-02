@@ -325,6 +325,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		}
 		btnPizzaDisplay.setEnabled(true);
 		btnCustomerDisplay.setEnabled(true);
+		btnCalculate.setEnabled(true);
 		btnReset.setEnabled(true);
 		btnLoadFile.setEnabled(false);
 	}
