@@ -44,6 +44,25 @@ public abstract class Customer {
 		this.locationX = locationX;
 		this.locationY = locationY;
 		this.type = type;
+		
+		if(name.length() > 20){
+			throw new CustomerException();
+		}
+		else if(name.contentEquals(" ")){
+			throw new CustomerException();
+		}
+		else if(mobileNumber.length() > 10){
+			throw new CustomerException();
+		}
+		else if(mobileNumber.startsWith("0") == false){
+			throw new CustomerException();
+		}
+		else if((locationX == 0.0 && locationY == 0.0) && type != "Pick Up"){
+			throw new CustomerException();
+		}
+		else if((locationX != 0.0 && locationY != 0.0) && type == "Pick Up"){
+			throw new CustomerException();
+		}
 	}
 	
 	
