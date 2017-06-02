@@ -27,6 +27,7 @@ public class LogHandlerCustomerTests {
 		
 	}
 	
+	
 	@Test(expected = Exception.class)
 	public void getCustomerException() throws CustomerException, LogHandlerException{
 		String log = "19:00:00,19:20:00,Casey Jones,0123456789,DVC,5,5,PZV,2";

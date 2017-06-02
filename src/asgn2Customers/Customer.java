@@ -49,10 +49,16 @@ public abstract class Customer {
 		if(name.length() > 20){
 			throw new CustomerException();
 		}
-		else if(name.contentEquals(" ")){
+		else if(name.isEmpty() == true){
+			throw new CustomerException();
+		}
+		else if(name.equals(null)){
 			throw new CustomerException();
 		}
 		else if(mobileNumber.length() > 10){
+			throw new CustomerException();
+		}
+		else if(mobileNumber.length() < 10){
 			throw new CustomerException();
 		}
 		else if(mobileNumber.startsWith("0") == false){
@@ -62,6 +68,18 @@ public abstract class Customer {
 			throw new CustomerException();
 		}
 		else if((locationX != 0.0 && locationY != 0.0) && type == "Pick Up"){
+			throw new CustomerException();
+		}
+		else if(locationY > 10){
+			throw new CustomerException();
+		}
+		else if(locationX > 10){
+			throw new CustomerException();
+		}
+		else if(locationY < -10){
+			throw new CustomerException();
+		}
+		else if(locationX < -10){
 			throw new CustomerException();
 		}
 	}

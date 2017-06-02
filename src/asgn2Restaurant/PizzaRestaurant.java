@@ -71,9 +71,10 @@ public class PizzaRestaurant {
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		Customer Customer = customers.get(index);
-		if(index < customers.size()){
+		if(index < customers.size() || index >= 0 ){
 			return Customer;
-		} else {
+		}
+		else {
 			throw new CustomerException();
 		}
 	}
@@ -151,8 +152,8 @@ public class PizzaRestaurant {
 	 * <P> POST:  The pizzas and customers fields are set to their initial empty states
 	 */
 	public void resetDetails(){
-		customers.clear();;
-		pizzas.clear();;
+		customers.clear();
+		pizzas.clear();
 		
 	}
 
