@@ -32,10 +32,10 @@ public class CustomerFactory {
 		if(customerCode.equals("PUC")){
 			return new PickUpCustomer(name, mobileNumber, locationX, locationY);
 		}
-		else if(customerCode.equals("DVC")){
+		else if(customerCode.equals("DNC")){
 			return new DroneDeliveryCustomer(name, mobileNumber, locationX, locationY);
 		}
-		else if(customerCode.equals("DNC")){
+		else if(customerCode.equals("DVC")){
 			return new DriverDeliveryCustomer(name, mobileNumber, locationX, locationY);
 		} else {
 			throw new CustomerException();
