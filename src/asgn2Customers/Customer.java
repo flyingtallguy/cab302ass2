@@ -47,40 +47,40 @@ public abstract class Customer {
 		this.type = type;
 		
 		if(name.length() > 20){
-			throw new CustomerException();
+			throw new CustomerException("name too long");
 		}
 		else if(name.isEmpty() == true){
-			throw new CustomerException();
+			throw new CustomerException("name field is empty");
 		}
 		else if(name.equals(null)){
 			throw new CustomerException();
 		}
 		else if(mobileNumber.length() > 10){
-			throw new CustomerException();
+			throw new CustomerException("mobile number too long");
 		}
 		else if(mobileNumber.length() < 10){
-			throw new CustomerException();
+			throw new CustomerException("mobile number too short");
 		}
 		else if(mobileNumber.startsWith("0") == false){
-			throw new CustomerException();
+			throw new CustomerException("moblie number does not start with zero");
 		}
 		else if((locationX == 0.0 && locationY == 0.0) && type != "Pick Up"){
-			throw new CustomerException();
+			throw new CustomerException("cannot delive to store location");
 		}
 		else if((locationX != 0.0 && locationY != 0.0) && type == "Pick Up"){
-			throw new CustomerException();
+			throw new CustomerException("pick up customer must be at the store");
 		}
 		else if(locationY > 10){
-			throw new CustomerException();
+			throw new CustomerException("outside delivery area (too far north)");
 		}
 		else if(locationX > 10){
-			throw new CustomerException();
+			throw new CustomerException("outside delivery area (too far east)");
 		}
 		else if(locationY < -10){
-			throw new CustomerException();
+			throw new CustomerException("outside delivery area(too far south)");
 		}
 		else if(locationX < -10){
-			throw new CustomerException();
+			throw new CustomerException("outside delivery area(too far west)");
 		}
 	}
 	
