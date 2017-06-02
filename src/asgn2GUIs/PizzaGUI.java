@@ -198,7 +198,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			
 			try {
 				openFile();
-				JOptionPane.showMessageDialog(this,"File Successfully Loaded","Success!",JOptionPane.INFORMATION_MESSAGE);
 			} catch (CustomerException e) {
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Customer Exception", JOptionPane.ERROR_MESSAGE);
 			} catch (PizzaException e) {
@@ -307,19 +306,22 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		int returnValue = jfc.showOpenDialog(this);
 		
 		if(returnValue == JFileChooser.APPROVE_OPTION){
+			JOptionPane.showMessageDialog(this,"File Successfully Loaded","Success!",JOptionPane.INFORMATION_MESSAGE);
 			File selectedFile = jfc.getSelectedFile();
 			selectedFileName = selectedFile.getAbsolutePath();
 			System.out.println(selectedFileName);
 			restaurant = new PizzaRestaurant();
 			restaurant.processLog(selectedFileName);
+			
+			btnPizzaDisplay.setEnabled(true);
+			btnCustomerDisplay.setEnabled(true);
+			btnCalculate.setEnabled(true);
+			btnReset.setEnabled(true);
+			btnLoadFile.setEnabled(false);
 		}
 		else if (returnValue == JFileChooser.CANCEL_OPTION){
 			
 		}
-		btnPizzaDisplay.setEnabled(true);
-		btnCustomerDisplay.setEnabled(true);
-		btnCalculate.setEnabled(true);
-		btnReset.setEnabled(true);
-		btnLoadFile.setEnabled(false);
+
 	}
 }
