@@ -109,7 +109,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     //creating a customer table
     pnlDisplay.setLayout(new BorderLayout());
     tblCustomers = new JTable(modelCustomer = new DefaultTableModel(new Object[]{"Name", "Mobile Number","Customer Type", "X Location", "Y Location", "Distance"}, 0));
-	jspCustomer = new JScrollPane(tblCustomers);
+
+    jspCustomer = new JScrollPane(tblCustomers);
 	jspCustomer.setBounds(325, 66, 624, 192);
 	jspCustomer.setVisible(true);
 	pnlDisplay.add(jspCustomer);
@@ -129,14 +130,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     jspOrdersAndProfit.setBounds(325, 66, 624, 192);
     jspOrdersAndProfit.setVisible(true);
     pnlFour.add(jspOrdersAndProfit);
-	
-	
-	//creating the JTable for customers and orders
-//    modelCustomers = new DefaultTableModel(new Object[]{"Name", "Mobile", "Type", "X coords", "Y coords", "Distance"}, 0);
-//    tblCustomers = new JTable(modelCustomers);
-    
-//	modelCustomer = new DefaultTableModel(new Object[]{"Name", "Mobile", "Type", "X coords", "Y coords", "Distance"}, 0);
-//	tblCustomer = new JTable(modelCustomer);
     
 	
 	this.getContentPane().add(pnlDisplay,BorderLayout.CENTER);
@@ -148,7 +141,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	
 	repaint();
 	this.setVisible(true);
-	//Panel related code will go here
+	//tblCustomers.setEnabled(false);
+	//tblCustomers.setVisible(false);
 	}
 	
 	
@@ -200,11 +194,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		//Get event source 
 		Object src=arg0.getSource(); 
 		      
-		//Consider the alternatives - not all active at once. 
 		if (src == btnLoadFile) {
 			
 			try {
 				openFile();
+				JOptionPane.showMessageDialog(this,"File Successfully Loaded","Success!",JOptionPane.INFORMATION_MESSAGE);
 			} catch (CustomerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -219,8 +213,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		}
 		
 		if (src == btnPizzaDisplay){
+			JOptionPane.showMessageDialog(this,"Retrieving Order Details","Success!",JOptionPane.INFORMATION_MESSAGE);
 			Pizza Pizza = null;
 			btnPizzaDisplay.setEnabled(false);
+			btnCalculate.setEnabled(true);
 			
 			for(int i = 0; i < restaurant.getNumPizzaOrders(); i++){
 				try {
@@ -242,9 +238,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		if (src == btnCustomerDisplay){
 			Customer Customer = null;
 			btnCustomerDisplay.setEnabled(false);
-			
-			//System.out.println("Customer button pressed");
-			//modelCustomer.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
+			JOptionPane.showMessageDialog(this,"Retrieving Customer Details","Success!",JOptionPane.INFORMATION_MESSAGE);
 			
 			for(int i = 0; i < restaurant.getNumCustomerOrders(); i++){
 				try {
@@ -267,13 +261,20 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		}
 		
 		if (src == btnCalculate){
+			btnCalculate.setEnabled(false);
+		
+			JOptionPane.showMessageDialog(this,"Calculating Total Distance and Profits","Success!",JOptionPane.INFORMATION_MESSAGE);
+
+			modelOrdersAndProfit.addRow(new Object[]{ restaurant.getTotalDeliveryDistance(), restaurant.getTotalProfit()});
+
 			
-			restaurant.getTotalDeliveryDistance();
-			restaurant.getTotalProfit();
+
 		}
 		
 		if (src == btnReset){
 			restaurant.resetDetails();
+			
+			JOptionPane.showMessageDialog(this,"Reseting All Data","Success!",JOptionPane.INFORMATION_MESSAGE);
 			
 			modelCustomer.getDataVector().removeAllElements();
 			modelCustomer.fireTableDataChanged();
@@ -281,6 +282,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			
 			modelOrders.getDataVector().removeAllElements();
 			modelOrders.fireTableDataChanged();
+			
+			modelOrdersAndProfit.getDataVector().removeAllElements();
+			modelOrdersAndProfit.fireTableDataChanged();
 			
 			btnLoadFile.setEnabled(true);
 			btnPizzaDisplay.setEnabled(false);
@@ -321,7 +325,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		}
 		btnPizzaDisplay.setEnabled(true);
 		btnCustomerDisplay.setEnabled(true);
-		btnCalculate.setEnabled(true);
 		btnReset.setEnabled(true);
 		btnLoadFile.setEnabled(false);
 	}
