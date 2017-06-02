@@ -21,7 +21,7 @@ import asgn2Exceptions.PizzaException;
 /** 
  * A class that tests the asgn2Pizzas.PizzaFactory class.
  * 
- * @author Person B 
+ * @author Jayden Worrall 
  * 
  */
 public class PizzaFactoryTests {
